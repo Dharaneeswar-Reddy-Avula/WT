@@ -1,0 +1,91 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+:root {
+  --primary-color: #2D3047;
+  --secondary-color: #419D78;
+  --accent-color: #E0A458;
+  --text-color: #2D3047;
+  --background-color: #FAFAFA;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+.hero-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+}
+
+.nav-link {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+}
+
+.card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.font-showcase {
+  padding: 2rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Carousel customization */
+.carousel-item {
+  height: 600px;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Social media icons */
+.social-icons a {
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--accent-color) !important;
+}

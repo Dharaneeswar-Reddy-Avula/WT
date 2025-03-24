@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PenTool as Tool, Download, Info } from "lucide-react";
-
+import { Link } from "lucide-react";
 // Simulated API data (replace with real API call if available)
 const fetchTools = () => {
   return new Promise((resolve) => {
@@ -104,7 +104,9 @@ function Tools() {
       >
         <Tool className="text-primary mb-3" size={40} />
         <h1 className="display-4 mb-3 fw-bold">Design Tools & Resources</h1>
-        <p className="lead text-muted">Essential tools to enhance your design workflow</p>
+        <p className="lead text-muted">
+          Essential tools to enhance your design workflow
+        </p>
       </motion.div>
 
       {/* Tools Grid */}
@@ -124,9 +126,13 @@ function Tools() {
             <div className="card h-100 border-0 shadow-sm">
               <div className="card-body d-flex flex-column">
                 <h3 className="h5 mb-3">{tool.name}</h3>
-                <p className="text-muted mb-4 flex-grow-1">{tool.description}</p>
+                <p className="text-muted mb-4 flex-grow-1">
+                  {tool.description}
+                </p>
                 <div className="d-flex justify-content-between align-items-center">
-                  <span className="badge bg-primary text-capitalize">{tool.category}</span>
+                  <span className="badge bg-primary text-capitalize">
+                    {tool.category}
+                  </span>
                   <div className="btn-group">
                     <button
                       className="btn btn-outline-primary btn-sm"
@@ -154,68 +160,79 @@ function Tools() {
 
       {/* Tool Details Modal */}
       {showModal && (
-        <motion.div
-          className="modal fade show"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          style={{ display: "block" }}
-          onClick={closeModal} // Close on backdrop click
-        >
-          <motion.div
-            className="modal-dialog modal-dialog-centered"
-            initial={{ scale: 0.9, y: 50 }}
-            animate={{ scale: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+  <motion.div
+    className="modal fade show"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    style={{
+      display: "block",
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: 1050,
+      overflowY: "auto",
+    }}
+    onClick={closeModal} // Close modal when clicking outside
+  >
+    <motion.div
+      className="modal-dialog modal-dialog-centered"
+      initial={{ scale: 0.9, y: 50 }}
+      animate={{ scale: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+    >
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">{selectedTool?.name}</h5>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={closeModal}
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="modal-body">
+          <p>{selectedTool?.details}</p>
+          {selectedTool?.externalLink && (
+            <p>
+              <a
+                href={selectedTool?.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary"
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+              >
+                Visit Tool Website
+              </a>
+            </p>
+          )}
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={closeModal}
           >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{selectedTool?.name}</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={closeModal}
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                <p>{selectedTool?.details}</p>
-                {selectedTool?.externalLink && (
-                  <p>
-                    <a
-                      href={selectedTool.externalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary"
-                    >
-                      Visit Tool Website
-                    </a>
-                  </p>
-                )}
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-                <a
-                  href={selectedTool?.downloadLink}
-                  className="btn btn-primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Download size={16} className="me-1" /> Download
-                </a>
-              </div>
-            </div>
-          </motion.div>
-          <div className="modal-backdrop fade show" />
-        </motion.div>
-      )}
+            Close
+          </button>
+          <a
+            href={selectedTool?.downloadLink}
+            className="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Download size={16} className="me-1" /> Download
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  </motion.div>
+)}
+
     </div>
   );
 }
